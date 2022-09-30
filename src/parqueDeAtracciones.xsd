@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:annotation>
+        <xs:documentation>
+
+            Notación para describir un parque de atracciones. Debe incluir:
+            -nombre
+            -tipos de entrada, cada uno con su precio (un solo día, fin de semana, abono mensual)
+            -cada entrada puede incluir o no hotel
+            -ciudad
+            -visitantes anuales, en millones, con decimales
+            -lista de atracciones, cada una con:-----
+            -nombre
+            -tipo(voladora, acuática, terror, mareante)
+            -porcentaje de usuarios que vomitan
+            -fecha de la última revisión
+            -si hace foto o no(atributo)
+            -puestos de comida----
+            -si es comida basura o no(atributo, por defecto true)
+            -empresa matriz (McDonalds, Buger King, KFC, Taco Bell)
+            -porcentaje de indigestiones(opcional)
+            -nombre de atracciones desaconsejadas después de comer aquí
+        </xs:documentation>
+    </xs:annotation>
+    <xs:element name="parqueDeAtracciones">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="nombre" type="xs:string"/>
+                <xs:element name="tipoEntrada" type="TipoEntrada"/>
+                <xs:element name="ciudad" type="xs:string"/>
+                <xs:element name="visitantesAnuales" type="xs:double"/>
+                <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                    <xs:element name="atraccion" type="TipoAtraccion"/>
+                </xs:sequence>
+                <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                    <xs:element name="puesto" type="TipoPuesto"/>
+                </xs:sequence>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="TipoEntrada">
+        <xs:complexContent>
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="Un solo día"/>
+                <xs:enumeration value="Fin de semana"/>
+                <xs:enumeration value="Abono mensual"/>
+            </xs:restriction>
+        </xs:complexContent>
+        <xs:attribute name="incluyeHotel" type="xs:boolean"/>
+        <xs:attribute name="precio" type="TipoPrecio"/>
+    </xs:complexType>
+
+
+    <xs:simpleType name="TipoPrecio">
+        <xs:restriction base="xs:double">
+            <xs:minExclusive value="0"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="TipoAtraccion">
+        <xs:complexContent>
+            <xs:extension base="xs:complexType">
+                <xs:sequence>
+                    <xs:element name="nombre" type="xs:string"/>
+                    <xs:element name="tipo" type="CategoriaAtraccion"/>
+                    <xs:element name="usuariosQueVomitan" type="xs:double"/>
+                    <xs:element name="ultimaRevision" type="xs:date"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+        <xs:attribute name="foto" type="xs:boolean"/>
+    </xs:complexType>
+
+    <xs:simpleType name="CategoriaAtraccion">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="voladora"/>
+            <xs:enumeration value="acuática"/>
+            <xs:enumeration value="terror"/>
+            <xs:enumeration value="mareante"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="TipoPuesto">
+        <xs:complexContent>
+            <xs:extension base="xs:complexType">
+                <xs:sequence>
+                    <xs:element name="empresa" type="xs:complexType">
+                     
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+        <xs:attribute name="comidaBasura" type="xs:boolean"/>
+    </xs:complexType>
+
+</xs:schema>

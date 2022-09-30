@@ -1,0 +1,24 @@
+<parqueDeAtracciones xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xsi:noNamespaceSchemaLocation="parqueDeAtracciones.xsd">
+    <nombre>Campamento Krusty</nombre>
+    <tipoEntrada incluyeHotel="false" precio="-40.50">Un solo día</tipoEntrada><!--¿Por qué acepta negativos? -->
+    <ciudad>Mesopotamia</ciudad>
+    <visitantesAnuales>10,5</visitantesAnuales>
+
+        <atraccion foto="false">
+            <nombre>Chorros Locos</nombre>
+            <tipo>voladora</tipo>
+            <usuariosQueVomitan>10</usuariosQueVomitan>
+            <ultimaRevision>10/10/1010</ultimaRevision>
+        </atraccion>
+
+        <puesto comidaBasura="true">
+            <empresa>KFC</empresa>
+            <porcentajeIndigestiones>50</porcentajeIndigestiones>
+            <atraccionesDesaconsejadas>
+                <atraccion>Chorros Locos</atraccion>
+            </atraccionesDesaconsejadas>
+        </puesto>
+
+
+</parqueDeAtracciones>
